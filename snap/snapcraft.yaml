@@ -1,0 +1,16 @@
+name: kms-plugin-vault
+version: 1.0.0
+summary: gRPC server for K8s KMS plugin backed by Vault
+description: >
+  This snap runs a gRPC server which acts as a Key Management Service (KMS) plugin to
+  provide encryption-as-a-service for Kubernetes, backed by an external Vault service.
+apps:
+  kms-plugin-vault:
+    command: PYTHONPATH=kms_plugin_vault kms_plugin_vault/kms_plugin_vault_server.py
+    daemon: simple
+    plugs: [network-bind]
+parts:
+  kms-plugin-vault:
+    source: .
+    plugin: python
+    requirements: requirements.txt
